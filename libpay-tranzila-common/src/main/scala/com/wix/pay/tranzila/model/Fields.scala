@@ -1,0 +1,27 @@
+package com.wix.pay.tranzila.model
+
+object Fields {
+  val supplier = "supplier"
+  val sum = "sum"
+  val ccNumber = "ccno"
+  val expMonth = "expmonth"
+  val expYear = "expyear"
+  val expDate = "expdate"
+  val creditType = "cred_type"
+  val currency = "currency"
+  val cvv = "mycvv"
+  val holderId = "myid"
+  val firstPaymentAmount = "fpay"
+  val extraPaymentsAmount = "spay"
+  val numExtraPayments = "npay"
+  val stars = "stars"
+  val transactionMode = "tranmode"
+  val authnr = "authnr"
+  val index = "index"
+  val response = "Response"
+  val confirmationCode = "ConfirmationCode"
+  val contact = "contact"
+  val phone = "phone"
+  val email = "email"
+  val productDescription = "pdesc"
+}

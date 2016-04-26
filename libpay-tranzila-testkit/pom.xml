@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wix.pay</groupId>
+    <artifactId>libpay-tranzila-testkit</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>libpay test-kit for Tranzila payment</name>
+    <description>libpay test-kit for Tranzila payment gateway</description>
+
+    <developers>
+        <developer>
+            <name>Danny Leshem</name>
+            <email>dannyl@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Ohad Raz</name>
+            <email>ohadr@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Yoav Amit</name>
+            <email>yoava@wix.com</email>
+            <roles>
+                <role>owner</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <parent>
+        <groupId>com.wix.pay</groupId>
+        <artifactId>libpay-tranzila-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+		<relativePath>../libpay-tranzila-parent</relativePath>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.wix.pay</groupId>
+            <artifactId>libpay-tranzila-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wix.hoopoe.http</groupId>
+            <artifactId>http-testkit_${scala.dependencies.version}</artifactId>
+            <version>${com.wix.hoopoe.http.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>${com.google.http.client.version}</version>
+        </dependency>
+    </dependencies>
+</project>
