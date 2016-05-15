@@ -6,8 +6,17 @@
     <artifactId>libpay-tranzila-testkit</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>libpay test-kit for Tranzila payment</name>
+    <name>libpay Tranzila payment gateway adapter test-kit</name>
     <description>libpay test-kit for Tranzila payment gateway</description>
+
+
+    <parent>
+        <groupId>com.wix.pay</groupId>
+        <artifactId>libpay-tranzila-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../libpay-tranzila-parent</relativePath>
+    </parent>
+
 
     <developers>
         <developer>
@@ -32,13 +41,6 @@
             </roles>
         </developer>
     </developers>
-
-    <parent>
-        <groupId>com.wix.pay</groupId>
-        <artifactId>libpay-tranzila-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-		<relativePath>../libpay-tranzila-parent</relativePath>
-    </parent>
 
     <dependencies>
         <dependency>
