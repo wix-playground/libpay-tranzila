@@ -66,7 +66,7 @@
     <properties>
         <com.wix.hoopoe.http.version>0.0.1</com.wix.hoopoe.http.version>
         <com.google.http.client.version>1.21.0</com.google.http.client.version>
-        <org.json4js.version>3.3.0</org.json4js.version>
+        <org.json4js.version>3.4.0</org.json4js.version>
         <com.wix.pay.libpay.version>1.0.0-SNAPSHOT</com.wix.pay.libpay.version>
         <commons.codec.version>1.10</commons.codec.version>
     </properties>
