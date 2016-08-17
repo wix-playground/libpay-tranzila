@@ -54,7 +54,7 @@ class TranzilaGateway(requestFactory: HttpRequestFactory,
     } match {
       case Success(authorizationKey) => Success(authorizationKey)
       case Failure(e: PaymentException) => Failure(e)
-      case Failure(e) => Failure(new PaymentErrorException(e.getMessage, e))
+      case Failure(e) => Failure(PaymentErrorException(e.getMessage, e))
     }
   }
 
@@ -101,7 +101,7 @@ class TranzilaGateway(requestFactory: HttpRequestFactory,
     } match {
       case Success(numTrans) => Success(numTrans)
       case Failure(e: PaymentException) => Failure(e)
-      case Failure(e) => Failure(new PaymentErrorException(e.getMessage, e))
+      case Failure(e) => Failure(PaymentErrorException(e.getMessage, e))
     }
   }
 
@@ -123,7 +123,7 @@ class TranzilaGateway(requestFactory: HttpRequestFactory,
     } match {
       case Success(authorizationKey) => Success(authorizationKey)
       case Failure(e: PaymentException) => Failure(e)
-      case Failure(e) => Failure(new PaymentErrorException(e.getMessage, e))
+      case Failure(e) => Failure(PaymentErrorException(e.getMessage, e))
     }
   }
 
@@ -183,10 +183,17 @@ class TranzilaGateway(requestFactory: HttpRequestFactory,
     val statusCode = response(Fields.response)
 
     statusCode match {
-      case StatusCodes.success => // Operation successful.
-      case IsShvaRejectedStatusCode(rejectedStatusCode) => throw new PaymentRejectedException(s"Status code: $rejectedStatusCode")
-      case IsTranzilaRejectedStatusCode(rejectedStatusCode) => throw new PaymentRejectedException(s"Status code: $rejectedStatusCode")
-      case _ => throw new PaymentErrorException(s"Status code: $statusCode")
+      case StatusCodes.success =>
+        // Operation successful.
+
+      case IsShvaRejectedStatusCode(rejectedStatusCode) =>
+        throw PaymentRejectedException(s"Status code: $rejectedStatusCode")
+
+      case IsTranzilaRejectedStatusCode(rejectedStatusCode) =>
+        throw PaymentRejectedException(s"Status code: $rejectedStatusCode")
+
+      case _ =>
+        throw PaymentErrorException(s"Status code: $statusCode")
     }
   }
 }
