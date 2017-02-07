@@ -38,7 +38,7 @@ class TranzilaGatewayIT extends SpecWithJUnit {
     )
     val merchantKey = merchantParser.stringify(someMerchant)
 
-    val someCurrencyAmount = CurrencyAmount("ILS", 33.3)
+    val somePayment = Payment(currencyAmount = CurrencyAmount("ILS", 33.3))
     val someAdditionalFields = CreditCardOptionalFields.withFields(
       csc = Some("123"),
       holderId = Some("some holder ID"))
@@ -78,8 +78,8 @@ class TranzilaGatewayIT extends SpecWithJUnit {
 
       driver.aRequestFor(Map(
         Fields.supplier -> Some(someMerchant.username),
-        Fields.sum -> Some(toTranzilaAmount(someCurrencyAmount.amount)),
-        Fields.currency -> Some(toTranzilaCurrency(someCurrencyAmount.currency)),
+        Fields.sum -> Some(toTranzilaAmount(somePayment.currencyAmount.amount)),
+        Fields.currency -> Some(toTranzilaCurrency(somePayment.currencyAmount.currency)),
         Fields.transactionMode -> Some(TransactionModes.VERIFY),
         Fields.ccNumber -> Some(someCreditCard.number),
         Fields.expDate -> Some(toTranzilaYearMonth(
@@ -95,7 +95,7 @@ class TranzilaGatewayIT extends SpecWithJUnit {
       tranzila.authorize(
         merchantKey = merchantKey,
         creditCard = someCreditCard,
-        currencyAmount = someCurrencyAmount,
+        payment = somePayment,
         customer = Some(someCustomer),
         deal = Some(someDeal)
       ) must beAFailedTry(
@@ -109,8 +109,8 @@ class TranzilaGatewayIT extends SpecWithJUnit {
 
       driver.aRequestFor(Map(
         Fields.supplier -> Some(someMerchant.username),
-        Fields.sum -> Some(toTranzilaAmount(someCurrencyAmount.amount)),
-        Fields.currency -> Some(toTranzilaCurrency(someCurrencyAmount.currency)),
+        Fields.sum -> Some(toTranzilaAmount(somePayment.currencyAmount.amount)),
+        Fields.currency -> Some(toTranzilaCurrency(somePayment.currencyAmount.currency)),
         Fields.transactionMode -> Some(TransactionModes.VERIFY),
         Fields.ccNumber -> Some(someCreditCard.number),
         Fields.expDate -> Some(toTranzilaYearMonth(
@@ -132,7 +132,7 @@ class TranzilaGatewayIT extends SpecWithJUnit {
       val authorizationKey = tranzila.authorize(
         merchantKey = merchantKey,
         creditCard = someCreditCard,
-        currencyAmount = someCurrencyAmount,
+        payment = somePayment,
         customer = Some(someCustomer),
         deal = Some(someDeal)
       )
@@ -152,8 +152,8 @@ class TranzilaGatewayIT extends SpecWithJUnit {
 
       driver.aRequestFor(Map(
         Fields.supplier -> Some(someMerchant.username),
-        Fields.sum -> Some(toTranzilaAmount(someCurrencyAmount.amount)),
-        Fields.currency -> Some(toTranzilaCurrency(someCurrencyAmount.currency)),
+        Fields.sum -> Some(toTranzilaAmount(somePayment.currencyAmount.amount)),
+        Fields.currency -> Some(toTranzilaCurrency(somePayment.currencyAmount.currency)),
         Fields.transactionMode -> Some(TransactionModes.VERIFY),
         Fields.ccNumber -> Some(someCreditCard.number),
         Fields.expDate -> Some(toTranzilaYearMonth(
@@ -169,7 +169,7 @@ class TranzilaGatewayIT extends SpecWithJUnit {
       tranzila.authorize(
         merchantKey = merchantKey,
         creditCard = someCreditCard,
-        currencyAmount = someCurrencyAmount,
+        payment = somePayment,
         customer = Some(someCustomer),
         deal = Some(someDeal)
       ) must beAFailedTry.like {

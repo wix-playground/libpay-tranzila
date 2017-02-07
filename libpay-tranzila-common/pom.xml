@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.wix.pay</groupId>
             <artifactId>shva</artifactId>
-            <version>${com.wix.pay.libpay.version}</version>
+            <version>${com.wix.pay.shva.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json4s</groupId>

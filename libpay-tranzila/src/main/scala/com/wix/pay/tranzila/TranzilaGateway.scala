@@ -5,7 +5,7 @@ import java.util.{List => JList}
 
 import com.google.api.client.http._
 import com.wix.pay.creditcard.CreditCard
-import com.wix.pay.model.{CurrencyAmount, Customer, Deal}
+import com.wix.pay.model.{CurrencyAmount, Customer, Deal, Payment}
 import com.wix.pay.shva.model.{IsShvaRejectedStatusCode, StatusCodes}
 import com.wix.pay.tranzila.model.Conversions._
 import com.wix.pay.tranzila.model._
@@ -33,15 +33,17 @@ class TranzilaGateway(requestFactory: HttpRequestFactory,
                       merchantParser: TranzilaMerchantParser = new JsonTranzilaMerchantParser,
                       authorizationParser: TranzilaAuthorizationParser = new JsonTranzilaAuthorizationParser) extends PaymentGateway {
 
-  override def authorize(merchantKey: String, creditCard: CreditCard, currencyAmount: CurrencyAmount, customer: Option[Customer], deal: Option[Deal]): Try[String] = {
+  override def authorize(merchantKey: String, creditCard: CreditCard, payment: Payment, customer: Option[Customer], deal: Option[Deal]): Try[String] = {
     Try {
+      require(payment.installments == 1, "Installments are not yet implemented")
+
       val merchant = merchantParser.parse(merchantKey)
 
       val request = createAuthorizeOrSaleRequest(
         transactionMode = TransactionModes.VERIFY,
         merchant = merchant,
         creditCard = creditCard,
-        currencyAmount = currencyAmount,
+        currencyAmount = payment.currencyAmount,
         customer = customer,
         deal = deal
       )
@@ -105,15 +107,17 @@ class TranzilaGateway(requestFactory: HttpRequestFactory,
     }
   }
 
-  override def sale(merchantKey: String, creditCard: CreditCard, currencyAmount: CurrencyAmount, customer: Option[Customer], deal: Option[Deal]): Try[String] = {
+  override def sale(merchantKey: String, creditCard: CreditCard, payment: Payment, customer: Option[Customer], deal: Option[Deal]): Try[String] = {
     Try {
+      require(payment.installments == 1, "Installments are not yet implemented")
+
       val merchant = merchantParser.parse(merchantKey)
 
       val request = createAuthorizeOrSaleRequest(
         transactionMode = TransactionModes.FINAL,
         merchant = merchant,
         creditCard = creditCard,
-        currencyAmount = currencyAmount,
+        currencyAmount = payment.currencyAmount,
         customer = customer,
         deal = deal
       )
