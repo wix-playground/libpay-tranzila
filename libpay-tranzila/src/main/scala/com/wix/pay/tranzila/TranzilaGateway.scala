@@ -114,7 +114,7 @@ class TranzilaGateway(requestFactory: HttpRequestFactory,
       val merchant = merchantParser.parse(merchantKey)
 
       val request = createAuthorizeOrSaleRequest(
-        transactionMode = TransactionModes.FINAL,
+        transactionMode = TransactionModes.STANDARD,
         merchant = merchant,
         creditCard = creditCard,
         currencyAmount = payment.currencyAmount,
